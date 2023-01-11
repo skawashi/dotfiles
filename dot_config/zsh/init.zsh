@@ -38,5 +38,3 @@ if [[ -n ${TMUX-} ]];then
     export TERM=tmux-256color
 fi
 
-#chezmoi add
-#chezmoi add2
