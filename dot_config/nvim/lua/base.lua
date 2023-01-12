@@ -77,3 +77,6 @@ autocmd('BufReadPost' , {
 		vim.api.nvim_exec('silent! normal! g`"zv', false)
 	end,
 })
+
+-- Auto execute "chezmoi apply"
+vim.cmd([[autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path "%"]])
