@@ -5,9 +5,13 @@
 alias z='source ~/.zshrc'
 
 ## confing file edit
-alias vz='vim ~/.zshrc'
-alias vv='vim ~/.config/nvim/'
-alias vt="vim ~/.tmux.conf"
+alias vz='vim ${CHEZMOI_DIR}/dot_config/zsh/alias.zsh'
+alias vzi='vim ${CHEZMOI_DIR}/dot_config/zsh/init.zsh'
+alias vze='vim ${CHEZMOI_DIR}/dot_config/zsh/env.zsh'
+alias vv='vim ${CHEZMOI_DIR}/dot_config/nvim/'
+alias vt='vim ${CHEZMOI_DIR}/dot_tmux.conf'
+alias vts='vim ${CHEZMOI_DIR}/dot_config/tmux/statusline.conf'
+alias vtu='vim ${CHEZMOI_DIR}/dot_config/tmux/utility.conf'
 alias vomz='vim ~/.oh-my-zsh'
 alias vd='vim ~/.vim/dein.toml'
 alias vvi='vim ~/.vimrc'
@@ -64,9 +68,6 @@ alias drai='docker rmi $(docker images -q)'
 
 ## Pokemonsay
 alias poke="pokemonsay 'Welcome'"
-
-## For confirm to read this file.
-alias readalias="echo readalias!"
 
 ## available command
 # neofetch

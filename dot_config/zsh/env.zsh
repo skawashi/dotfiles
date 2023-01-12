@@ -10,13 +10,16 @@ export NODE_BREW=$HOME/.nodebrew/current/bin # nodebrew
 
 ## NeoVim
 export EDITOR='nvim'
-export NVIMCONF=$HOME/.config/nvim
+export NVIMCONF=$HOME/.local/share/chezmoi/dot_config/nvim
 
 ## Go lang
 export GOPATH=$HOME/code/go
 
 ## NODEサイズ
 export NODE_OPTIONS="--max-old-space-size=9216"
+
+## chezmoi
+export CHEZMOI_DIR=$HOME/.local/share/chezmoi/
 
 ###################
 # PATH
