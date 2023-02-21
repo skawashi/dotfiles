@@ -6,7 +6,7 @@ export FZF_TMUX=1
 export FZF_TMUX_OPTS="-p 80%,80%" #[width(%),[heigh(%)]
 
 ## nodebrew
-export NODE_BREW=$HOME/.nodebrew/current/bin # nodebrew
+# export NODE_BREW=$HOME/.nodebrew/current/bin # nodebrew
 
 ## NeoVim
 export EDITOR='nvim'
@@ -25,8 +25,8 @@ export CHEZMOI_DIR=$HOME/.local/share/chezmoi/
 # PATH
 ###################
 ## nodebrew
-export PATH=~/.composer/vendor/bin:$PATH
-export PATH=$NODE_BREW:/usr/local/bin:$PATH #nodebrew
+# export PATH=~/.composer/vendor/bin:$PATH
+# export PATH=$NODE_BREW:/usr/local/bin:$PATH #nodebrew
 
 ## Pokemonsay
 export PATH=/Users/skawashi/bin:$PATH
@@ -42,4 +42,12 @@ export PATH=/opt/homebrew/opt/php@7.4/sbin:$PATH
 # phpcs
 # export PATH=~/bin/PHP_CodeSniffer/bin:$PATH
 
+###################
+# nvm
+###################
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# source ~/.nvm/nvm.sh
+eval "$(direnv hook zsh)"
 

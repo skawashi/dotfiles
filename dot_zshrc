@@ -1,3 +1,7 @@
+if [[ -z $TMUX ]] then
+  /Users/skawashi/bin/pokemonsay 'Welcome'
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -174,10 +178,17 @@ ZSH_HIGHLIGHT_STYLES[root]='bg=red'弧の色を変える
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# zsh plugin install manually
+if [[ ! -d ~/.zsh/zsh-autopair ]]; then
+  git clone https://github.com/hlissner/zsh-autopair ~/.zsh/zsh-autopair
+fi
+source ~/.zsh/zsh-autopair/autopair.zsh
+autopair-init
+
 ## zsh config file read
 ZSH_DIR="${HOME}/.config/zsh"
 
-# .zshがディレクトリで、読み取り、実行、が可能なとき
+# zshがディレクトリで、読み取り、実行、が可能なとき
 if [ -d $ZSH_DIR ] && [ -r $ZSH_DIR ] && [ -x $ZSH_DIR ]; then
     # zshディレクトリより下にある、.zshファイルの分、繰り返す
     for file in ${ZSH_DIR}/**/*.zsh; do

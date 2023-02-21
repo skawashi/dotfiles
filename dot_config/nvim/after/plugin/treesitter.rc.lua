@@ -17,7 +17,16 @@ TS.setup({
     }
   },
   indent = {
+    enable = false,
+    disable = {
+      "python",
+    },
+  },
+  yati = {
     enable = true,
+    disable = {
+      "markdown",
+    },
   },
   matchup = {
     enable = true,

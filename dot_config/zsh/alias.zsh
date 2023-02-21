@@ -5,10 +5,11 @@
 alias z='source ~/.zshrc'
 
 ## confing file edit
-alias vz='vim ${CHEZMOI_DIR}/dot_config/zsh/alias.zsh'
+alias vz='vim ${CHEZMOI_DIR}/dot_zshrc'
+alias vza='vim ${CHEZMOI_DIR}/dot_config/zsh/alias.zsh'
 alias vzi='vim ${CHEZMOI_DIR}/dot_config/zsh/init.zsh'
 alias vze='vim ${CHEZMOI_DIR}/dot_config/zsh/env.zsh'
-alias vv='vim ${CHEZMOI_DIR}/dot_config/nvim/'
+alias vvp='vim ${CHEZMOI_DIR}/dot_config/nvim/lua/plugins.lua'
 alias vt='vim ${CHEZMOI_DIR}/dot_tmux.conf'
 alias vts='vim ${CHEZMOI_DIR}/dot_config/tmux/statusline.conf'
 alias vtu='vim ${CHEZMOI_DIR}/dot_config/tmux/utility.conf'
@@ -68,6 +69,10 @@ alias drai='docker rmi $(docker images -q)'
 
 ## Pokemonsay
 alias poke="pokemonsay 'Welcome'"
+
+## Ngrok
+alias ngrok="~/bin/ngrok"
+alias n="ngrok"
 
 ## available command
 # neofetch

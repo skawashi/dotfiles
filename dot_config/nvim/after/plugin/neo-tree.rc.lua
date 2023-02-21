@@ -41,12 +41,12 @@ neo_tree.setup({
 				neo_tree.close_all()
 			end,
 		},
-		{
-			event = 'file_added',
-			handler = function(file_path)
-				utils.open_file({}, file_path)
-			end,
-		},
+		-- {
+		-- 	event = 'file_added',
+		-- 	handler = function(file_path)
+		-- 		utils.open_file({}, file_path)
+		-- 	end,
+		-- },
 	},
 	filesystem = {
 		filtered_items = {
@@ -94,7 +94,7 @@ neo_tree.setup({
 				['a'] = 'add',
 				['d'] = 'delete',
 				['r'] = 'rename',
-				['c'] = 'copy_to_clipboard',
+				['y'] = 'copy_to_clipboard',
 				['x'] = 'cut_to_clipboard',
 				['p'] = 'paste_from_clipboard',
 				['m'] = 'move', -- takes text input for destination
@@ -117,7 +117,7 @@ neo_tree.setup({
 				['a'] = 'add',
 				['d'] = 'delete',
 				['r'] = 'rename',
-				['c'] = 'copy_to_clipboard',
+				['y'] = 'copy_to_clipboard',
 				['x'] = 'cut_to_clipboard',
 				['p'] = 'paste_from_clipboard',
 				['bd'] = 'buffer_delete',
@@ -136,7 +136,7 @@ neo_tree.setup({
 				['R'] = 'refresh',
 				['d'] = 'delete',
 				['r'] = 'rename',
-				['c'] = 'copy_to_clipboard',
+				['y'] = 'copy_to_clipboard',
 				['x'] = 'cut_to_clipboard',
 				['p'] = 'paste_from_clipboard',
 				['A'] = 'git_add_all',

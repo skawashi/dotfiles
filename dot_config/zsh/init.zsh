@@ -28,9 +28,9 @@ KEYTIMEOUT=1
 bindkey "ç" fzf-cd-widget # Opt+c で打たれる文字をバインド
 bindkey \^U backward-kill-line # ctrl+u で行頭からカーソル前まで削除
 
-if [[ -z $TMUX ]] then
-  pokemonsay 'Welcome'
-fi
+# if [[ -z $TMUX ]] then
+#   pokemonsay 'Welcome'
+# fi
 
 # tmuxで起動された場合にTERMをtmux.confで設定しているdefault terminalにする。
 # そうでなければ、xterm-256color

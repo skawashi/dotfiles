@@ -17,6 +17,9 @@ vim.g.maplocalleader = ' '
 -- Do not yank with x
 -- keymap.set('n', 'x', ''_x')
 
+-- Replace
+keymap.set('', '<C-h>', '<BS>')
+
 -- Increment/decrement
 keymap.set('n', '+', '<C-a>')
 keymap.set('n', '-', '<C-x>')

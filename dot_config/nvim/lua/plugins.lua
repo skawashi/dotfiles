@@ -29,6 +29,7 @@ packer.startup(function(use)
   use 'yutkat/wb-only-current-line.nvim'
   use 'folke/which-key.nvim'
   use 'yoshida-m-3/vim-im-select'
+  use 'hrsh7th/nvim-insx'
 
   -- Motion
   use {
@@ -60,6 +61,7 @@ packer.startup(function(use)
       "ThePrimeagen/harpoon", -- Optional: provides the "harpoon" query item
     },
   }
+  use 'rapan931/lasterisk.nvim'
 
   use 'kevinhwang91/nvim-hlslens'
   use 'petertriho/nvim-scrollbar'
@@ -109,7 +111,7 @@ packer.startup(function(use)
   use 'hrsh7th/cmp-cmdline' -- nvim-cmp source
   use 'hrsh7th/vim-vsnip' -- nvim-cmp source
   use 'ray-x/cmp-treesitter' -- nvim-cmp source
-  use 'windwp/nvim-autopairs'
+  -- use 'windwp/nvim-autopairs'
 
   -- Linter, Formatter
   use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP
@@ -118,6 +120,10 @@ packer.startup(function(use)
     run = function()
       require('nvim-treesitter.install').update({ with_sync = true })
     end,
+  }
+  use {
+    "yioneko/nvim-yati",
+    tag = "*",
   }
   use 'windwp/nvim-ts-autotag' -- Install after TS installation have completed
   use 'mrjones2014/nvim-ts-rainbow'
@@ -141,18 +147,28 @@ packer.startup(function(use)
   -- Language
   use 'jwalton512/vim-blade' -- blade
   use 'mtdl9/vim-log-highlighting' -- Log
+  -- use({
+  --   'iamcco/markdown-preview.nvim', -- Markdown
+  --   run = function()
+  --     vim.fn["mkdp#util#install"]()
+  --   end,
+  -- })
+
+  -- install without yarn or npm
   use({
-    'iamcco/markdown-preview.nvim', -- Markdown
-    run = function()
-      vim.fn["mkdp#util#install"]()
-    end,
+      "iamcco/markdown-preview.nvim",
+      run = function() vim.fn["mkdp#util#install"]() end,
   })
+  -- use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 
   -- Zen Mode
   use 'folke/zen-mode.nvim'
 
   -- startup time measurement
   use 'dstein64/vim-startuptime'
+
+  -- similar to mkdir -p on linux
+  use 'jghauser/mkdir.nvim'
 
 end) -- packer end
 
@@ -161,7 +177,7 @@ vim.cmd([[
   let g:better_whitespace_operator='_s' " 削除コマンドのprefix変更
   let g:strip_whitespace_on_save=1 " 保存時にスペース削除
   let g:strip_whitespace_confirm=0 " 0:保存時にスペース削除の確認をしない
-  let g:better_whitespace_filetypes_blacklist = ['alpha']
+  let g:better_whitespace_filetypes_blacklist = ['alpha', 'lspsagafinder']
   autocmd FileType * EnableStripWhitespaceOnSave
 ]])
 
@@ -169,3 +185,4 @@ vim.cmd([[
 vim.cmd([[
   runtime macros/sandwich/keymap/surround.vim
 ]])
+

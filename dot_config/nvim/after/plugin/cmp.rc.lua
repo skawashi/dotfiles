@@ -1,7 +1,7 @@
 local status, cmp = pcall(require, 'cmp')
 if (not status) then return end
 
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+-- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 local lspkind = require('lspkind')
 cmp.setup({
   snippet = {
@@ -91,7 +91,7 @@ cmp.setup.cmdline(":", {
   },
 })
 
-cmp.event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done()
-)
+-- cmp.event:on(
+--   'confirm_done',
+--   cmp_autopairs.on_confirm_done()
+-- )
