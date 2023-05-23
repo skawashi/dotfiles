@@ -9,7 +9,8 @@ vim.opt.title = false
 vim.opt.mouse = 'a'
 vim.opt.updatetime = 500
 
-vim.wo.number = true
+vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.signcolumn = 'yes:2'
 
 vim.opt.laststatus = 3
@@ -80,3 +81,5 @@ autocmd('BufReadPost' , {
 
 -- Auto execute "chezmoi apply"
 vim.cmd([[autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path "%"]])
+vim.cmd([[autocmd BufWritePost ~/.local/share/chezmoi/dot_tmux.conf ! chezmoi apply --source-path "%"]])
+vim.cmd([[autocmd BufWritePost ~/.local/share/chezmoi/dot_zshrc ! chezmoi apply --source-path "%"]])
