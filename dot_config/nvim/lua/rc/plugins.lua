@@ -22,6 +22,9 @@ local plugins = {
 		"williamboman/mason.nvim",
 		event = { "BufReadPre", "VimEnter" },
 		build = ":MasonUpdate",
+		config = function()
+			require("rc/pluginconf/mason")
+		end,
 	},
 
 	----------------------------------------------------------------
@@ -38,17 +41,29 @@ local plugins = {
 	-- Font Library
 	{
 		"nvim-tree/nvim-web-devicons",
-		config = function ()
-			require("rc/pluginconf/web-devicons")
+		config = function()
+			require("rc/pluginconf/nvim-web-devicons")
 		end,
 	},
 
+	--------------------------------
+	-- UI Library
+	{
+		"stevearc/dressing.nvim",
+		event = "VimEnter",
+		config = function()
+			require("rc/pluginconf/dressing")
+		end,
+	},
 	----------------------------------------------------------------
 	-- Color Scheme
 	{
 		"svrana/neosolarized.nvim",
 		lazy = false,
 		priority = 1000,
+		config = function()
+			require("rc/pluginconf/neosolarized")
+		end,
 		dependencies = {
 			"tjdevries/colorbuddy.nvim",
 		},
@@ -58,8 +73,12 @@ local plugins = {
 	-- Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = { "BufReadPost" },
+		lazy = false,
+		priority = 800,
 		build = ":TSUpdateSync",
+		config = function()
+			require("rc/pluginconf/nvim-treesitter")
+		end,
 		dependencies = {
 			{ "JoosepAlviste/nvim-ts-context-commentstring" },
 			{ "nvim-treesitter/nvim-treesitter-refactor" },
@@ -67,7 +86,13 @@ local plugins = {
 			{ "yioneko/nvim-yati" },
 			{ "mrjones2014/nvim-ts-rainbow" },
 			{ "andymass/vim-matchup" },
-			{ "windwp/nvim-ts-autotag" },
+			{
+				"windwp/nvim-ts-autotag",
+				config = function()
+					require("rc/pluginconf/nvim-ts-autotag")
+				end,
+			},
+			{ "RRethy/nvim-treesitter-endwise" },
 		},
 	},
 
@@ -76,6 +101,9 @@ local plugins = {
 	{
 		"m-demare/hlargs.nvim",
 		event = "VeryLazy",
+		config = function()
+			require("rc/pluginconf/hlargs")
+		end,
 	},
 
 	----------------------------------------------------------------
@@ -85,28 +113,54 @@ local plugins = {
 	-- Language Server Protocol(LSP)
 	{
 		"neovim/nvim-lspconfig",
-		config = function ()
-			require("rc/pluginconf/lspconfig")
+		config = function()
+			require("rc/pluginconf/nvim-lspconfig")
 		end,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
 		event = "BufReadPre",
+		config = function()
+			require("rc/pluginconf/mason-lspconfig")
+		end,
+		dependencies = {
+			{
+				"weilbith/nvim-lsp-smag",
+				after = "nvim-lspconfig",
+			},
+		},
 	},
 
 	--------------------------------
-	-- Language Server Protocol(LSP)
+	-- LSP's UI
 	{
 		"nvimdev/lspsaga.nvim",
-		event = "LspAttach",
+		event = "VimEnter",
+		config = function()
+			require("rc/pluginconf/lspsaga")
+		end,
 		dependencies = {
 			{ "nvim-tree/nvim-web-devicons" },
 			{ "nvim-treesitter/nvim-treesitter" },
 		},
 	},
 	{
-		"folke/trouble.nvim",
+		"folke/lsp-colors.nvim",
 		event = "VimEnter",
+		config = function()
+			require("rc/pluginconf/lsp-colors")
+		end,
+	},
+	{
+		"folke/trouble.nvim",
+		event = "VeryLazy",
+	},
+	{
+		"j-hui/fidget.nvim",
+		event = "LspAttach",
+		config = function()
+			require("rc/pluginconf/fidget")
+		end,
 	},
 
 	--------------------------------
@@ -114,7 +168,7 @@ local plugins = {
 	{
 		"hrsh7th/nvim-cmp",
 		event = "VimEnter",
-		config = function ()
+		config = function()
 			require("rc/pluginconf/nvim-cmp")
 		end,
 		dependencies = {
@@ -137,11 +191,10 @@ local plugins = {
 			{ "ray-x/cmp-treesitter" },
 			{
 				"onsails/lspkind-nvim",
-				config = function ()
+				config = function()
 					require("rc/pluginconf/lspkind-nvim")
 				end,
 			},
-			{ "RRethy/nvim-treesitter-endwise"},
 		},
 	},
 	----------------------------------------------------------------
@@ -152,6 +205,9 @@ local plugins = {
 	{
 		"goolord/alpha-nvim",
 		event = "BufEnter",
+		config = function()
+			require("rc/pluginconf/alpha-nvim")
+		end,
 	},
 
 	--------------------------------
@@ -159,6 +215,9 @@ local plugins = {
 	{
 		"nvim-lualine/lualine.nvim",
 		event = "VimEnter",
+		config = function()
+			require("rc/pluginconf/lualine")
+		end,
 	},
 
 	--------------------------------
@@ -166,14 +225,23 @@ local plugins = {
 	{
 		"akinsho/nvim-bufferline.lua",
 		event = "VimEnter",
-		dependencies = "nvim-tree/nvim-web-devicons",
+		config = function()
+			require("rc/pluginconf/bufferline")
+		end,
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+		},
 	},
 
 	--------------------------------
 	-- Colorizer
 	{
 		"norcalli/nvim-colorizer.lua",
-		event = "VeryLazy",
+		lazy = false,
+		priority = 900,
+		config = function()
+			require("rc/pluginconf/nvim-colorizer")
+		end,
 	},
 
 	--------------------------------
@@ -181,7 +249,12 @@ local plugins = {
 	{
 		"petertriho/nvim-scrollbar",
 		event = "VimEnter",
-		dependencies = { { "kevinhwang91/nvim-hlslens" } },
+		config = function()
+			require("rc/pluginconf/nvim-scrollbar")
+		end,
+		dependencies = {
+			"kevinhwang91/nvim-hlslens",
+		},
 	},
 
 	----------------------------------------------------------------
@@ -192,6 +265,9 @@ local plugins = {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = "VimEnter",
+		config = function()
+			require("rc/pluginconf/indent-blankline")
+		end,
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 		},
@@ -207,7 +283,17 @@ local plugins = {
 	{
 		"yoshida-m-3/vim-im-select",
 		event = "VeryLazy",
+		config = function()
+			require("rc/pluginconf/vim-im-select")
+		end,
 	},
+	-- {
+	-- 	"ntpeters/vim-better-whitespace",
+	-- 	event = "VimLazy",
+	-- 	config = function ()
+	-- 		require("rc/pluginconf/vim-better-whitespace")
+	-- 	end,
+	-- },
 	{
 		"yutkat/wb-only-current-line.nvim",
 		event = "VeryLazy",
@@ -218,6 +304,9 @@ local plugins = {
 	{
 		"numToStr/Comment.nvim",
 		event = "VeryLazy",
+		config = function()
+			require("rc/pluginconf/Comment")
+		end,
 	},
 
 	--------------------------------
@@ -225,6 +314,9 @@ local plugins = {
 	{
 		"jose-elias-alvarez/null-ls.nvim",
 		event = "LspAttach",
+		config = function()
+			require("rc/pluginconf/null-ls")
+		end,
 	},
 
 	--------------------------------
@@ -238,21 +330,24 @@ local plugins = {
 	-- 	event = "VimEnter",
 	-- },
 	{
-    "altermo/npairs-integrate-upair",
-    dependencies = {
+		"altermo/npairs-integrate-upair",
+		event = "VimEnter",
+		config = function()
+			require("npairs-int-upair").setup({
+				bs = "u",
+			})
+		end,
+		dependencies = {
 			{ "windwp/nvim-autopairs" },
 			{ "altermo/ultimate-autopair.nvim" },
 		},
-		event = "VimEnter",
-    config = function ()
-			require("npairs-int-upair").setup({
-				bs='u'
-			})
-    end,
 	},
 
 	----------------------------------------------------------------
 	-- Editing
+
+	--------------------------------
+	-- Operater
 	{
 		"kylechui/nvim-surround",
 		event = "VeryLazy",
@@ -264,10 +359,16 @@ local plugins = {
 	{
 		"kevinhwang91/nvim-hlslens",
 		event = "VeryLazy",
+		config = function()
+			require("rc/pluginconf/nvim-hlslens")
+		end,
 	},
 	{
 		"rapan931/lasterisk.nvim",
 		event = "VeryLazy",
+		config = function()
+			require("rc/pluginconf/lasterisk")
+		end,
 	},
 
 	----------------------------------------------------------------
@@ -279,6 +380,36 @@ local plugins = {
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "main",
 		event = "BufEnter",
+		config = function()
+			require("rc/pluginconf/neo-tree")
+		end,
+	},
+
+	--------------------------------
+	-- FuzzyFinder
+	{
+		"nvim-telescope/telescope.nvim",
+		event = { "VimEnter" },
+		config = function()
+			require("rc/pluginconf/telescope")
+		end,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+	},
+	{
+		"nvim-telescope/telescope-frecency.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("telescope").load_extension("frecency")
+		end,
+	},
+	{
+		"nvim-telescope/telescope-file-browser.nvim",
+		event = "VeryLazy",
+		config = function ()
+			require("telescope").load_extension("file_browser")
+		end,
 	},
 
 	----------------------------------------------------------------
@@ -296,6 +427,9 @@ local plugins = {
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
+		config = function()
+			require("rc/pluginconf/which-key")
+		end,
 	},
 
 	--------------------------------
@@ -307,6 +441,17 @@ local plugins = {
 
 	--------------------------------
 	-- Commandline
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		config = function ()
+			require("rc/pluginconf/noice")
+		end,
+		dependencies = {
+			{ "MunifTanjim/nui.nvim" },
+			{ "rcarriga/nvim-notify" },
+		},
+	},
 	{
 		"hrsh7th/cmp-cmdline",
 		event = "VimEnter",
@@ -321,7 +466,11 @@ local plugins = {
 	{
 		"lewis6991/gitsigns.nvim",
 		event = "VimEnter",
+		config = function()
+			require("rc/pluginconf/gitsigns")
+		end,
 	},
+
 } -- Plugin List End
 
 require("lazy").setup(plugins, {

@@ -1,5 +1,4 @@
-local status, TS = pcall(require, 'nvim-treesitter.configs')
-if (not status) then return end
+local TS = require("nvim-treesitter.configs")
 
 TS.setup({
   ensure_installed = {
@@ -9,12 +8,6 @@ TS.setup({
   },
   highlight = {
     enable = true,
-    disable = {     -- 一部の言語では無効にする
-      -- 'lua',
-      -- 'vue',
-      -- 'php',
-      -- 'help'
-    }
   },
   indent = {
     enable = false,
@@ -30,11 +23,6 @@ TS.setup({
   },
   matchup = {
     enable = true,
-    disable = {
-      -- 'c',
-      -- 'ruby'
-    },
-    -- [options]
   },
   autotag = {
     enable = true,
@@ -55,6 +43,9 @@ TS.setup({
       '#268bd2',
       '#6c71c4',
     }, -- table of hex strings
-    -- termcolors = {} -- table of colour name strings
+  },
+  endwise = {
+    enable = true,
   },
 })
+
