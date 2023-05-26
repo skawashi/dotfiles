@@ -1,33 +1,38 @@
 local cmp = require("cmp")
 local lspkind = require("lspkind")
+
+local luasnip = require("luasnip")
 cmp.setup({
 	snippet = {
 		expand = function(args)
-			vim.fn["vsnip#anonymous"](args.body)
+			luasnip.lsp_expand(args.body)
 		end,
 	},
 
 	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "nvim_lsp_signature_help" },
-		{ name = "nvim_lua" },
-		{ name = "buffer" },
-		{ name = "path" },
-		{ name = "treesitter" },
-		{ name = "mocword" },
-		{ name = "cmp_tabnine" },
+		{ name = "nvim_lsp", priority = 100 },
+		{ name = "nvim_lsp_signature_help", priority = 80 },
+		{ name = "nvim_lua", priority = 50 },
+		{ name = "luasnip", priority = 40 },
+		{ name = "buffer", priority = 50 },
+		{ name = "path", priority = 100 },
+		{ name = "treesitter", priority = 30 },
+		-- { name = "mocword" },
+		{ name = "cmp_tabnine", priority = 30 },
 		{
 			name = "dictionary",
 			keyword_length = 2,
+			priority = 10
 		},
 		{
 			name = "spell",
+			priority = 40,
 			option = {
 				keep_all_entries = false,
 				enable_in_context = function()
 					return true
 				end,
-			},
+			}
 		},
 	},
 
@@ -48,16 +53,17 @@ cmp.setup({
 				-- vim_item.abbr = string.sub(vim_item.abbr, 1, 20) -- 補完メニューで表示するサジェストの文字数制限
 				-- vim_item.kind = lspkind.presets.default[vim_item.kind]
 				vim_item.menu = ({
-					nvim_lsp = "[lsp]",
-					nvim_lua = "[lua]",
-					dictionary = "[dic]",
-					buffer = "[buf]",
-					cmp_tabnine = "[ctn]",
-					look = "[Look]",
-					path = "[path]",
-					mocword = "[moc]",
-					spell = "[spe]",
-					treesitter = "[ts]",
+					nvim_lsp		= "[LSP]",
+					nvim_lua		= "[NeoVimLua]",
+					luasnip			= "[LuaSnip]",
+					dictionary	= "[Dictionary]",
+					buffer			= "[Buffer]",
+					cmp_tabnine = "[TabNine]",
+					look				= "[Look]",
+					path				= "[Path]",
+					mocword			= "[mocword]",
+					spell				= "[Spell]",
+					treesitter	= "[TS]",
 				})[entry.source.name]
 				return vim_item
 			end,

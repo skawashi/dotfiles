@@ -18,20 +18,20 @@ telescope.setup({
       },
     },
   },
-  -- pickers = {
-  --   find_files = {
-  --     -- -- theme = 'dropdown',
-  --     -- -- hijack_netrw = true,
-  --     -- previewer = false,
-  --     -- layout_config = { height = 40 },
-  --   },
-  --   live_grep = {
-  --     --   theme = 'dropdown',
-  --     --   hijack_netrw = true,
-  --     -- previewer = false,
-  --     --   layout_config = { height = 40 },
-  --   },
-  -- },
+  pickers = {
+    find_files = {
+      -- -- theme = 'dropdown',
+      -- -- hijack_netrw = true,
+      -- previewer = false,
+      -- layout_config = { height = 40 },
+    },
+    live_grep = {
+      --   theme = 'dropdown',
+      --   hijack_netrw = true,
+      -- previewer = false,
+      --   layout_config = { height = 40 },
+    },
+  },
   extensions = {
     file_browser = {
       theme = 'dropdown',
@@ -61,8 +61,8 @@ telescope.setup({
   },
 })
 
--- telescope.load_extension('file_browser')
--- telescope.load_extension('frecency')
+telescope.load_extension('file_browser')
+telescope.load_extension('frecency')
 -- telescope.load_extension('lazygit')
 
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})

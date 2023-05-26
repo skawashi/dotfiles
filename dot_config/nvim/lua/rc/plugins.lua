@@ -20,7 +20,7 @@ local plugins = {
 	-- External Package Installer
 	{
 		"williamboman/mason.nvim",
-		event = { "BufReadPre", "VimEnter" },
+		event = { "BufReadPre", "VeryLazy" },
 		build = ":MasonUpdate",
 		config = function()
 			require("rc/pluginconf/mason")
@@ -50,7 +50,7 @@ local plugins = {
 	-- UI Library
 	{
 		"stevearc/dressing.nvim",
-		event = "VimEnter",
+		event = "VeryLazy",
 		config = function()
 			require("rc/pluginconf/dressing")
 		end,
@@ -73,8 +73,9 @@ local plugins = {
 	-- Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
-		lazy = false,
-		priority = 800,
+		-- lazy = false,
+		-- priority = 800,
+		event = "BufReadPost",
 		build = ":TSUpdateSync",
 		config = function()
 			require("rc/pluginconf/nvim-treesitter")
@@ -97,10 +98,17 @@ local plugins = {
 	},
 
 	--------------------------------
+	-- Treesitter Textobject
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		event = "VeryLazy"
+	},
+
+	--------------------------------
 	-- Treesitter UI Customize
 	{
 		"m-demare/hlargs.nvim",
-		event = "VeryLazy",
+		event = { "BufNewFile", "BufRead" },
 		config = function()
 			require("rc/pluginconf/hlargs")
 		end,
@@ -135,7 +143,7 @@ local plugins = {
 	-- LSP's UI
 	{
 		"nvimdev/lspsaga.nvim",
-		event = "VimEnter",
+		event = "VeryLazy",
 		config = function()
 			require("rc/pluginconf/lspsaga")
 		end,
@@ -146,14 +154,15 @@ local plugins = {
 	},
 	{
 		"folke/lsp-colors.nvim",
-		event = "VimEnter",
+		event = "VeryLazy",
 		config = function()
 			require("rc/pluginconf/lsp-colors")
 		end,
 	},
 	{
 		"folke/trouble.nvim",
-		event = "VeryLazy",
+		-- event = { "BufNewFile", "BufRead" },
+		keys = ":",
 	},
 	{
 		"j-hui/fidget.nvim",
@@ -167,7 +176,8 @@ local plugins = {
 	-- Auto Completion
 	{
 		"hrsh7th/nvim-cmp",
-		event = "VimEnter",
+		event = "InsertEnter",
+		keys = ":",
 		config = function()
 			require("rc/pluginconf/nvim-cmp")
 		end,
@@ -182,7 +192,6 @@ local plugins = {
 			{ "yutkat/cmp-mocword" },
 			{ "uga-rosa/cmp-dictionary" },
 			{ "saadparwaiz1/cmp_luasnip" },
-			{ "hrsh7th/vim-vsnip" },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{
 				"tzachar/cmp-tabnine",
@@ -214,7 +223,7 @@ local plugins = {
 	-- Statusline
 	{
 		"nvim-lualine/lualine.nvim",
-		event = "VimEnter",
+		event = "VeryLazy",
 		config = function()
 			require("rc/pluginconf/lualine")
 		end,
@@ -224,7 +233,7 @@ local plugins = {
 	-- Bufferline
 	{
 		"akinsho/nvim-bufferline.lua",
-		event = "VimEnter",
+		event = "VeryLazy",
 		config = function()
 			require("rc/pluginconf/bufferline")
 		end,
@@ -237,8 +246,9 @@ local plugins = {
 	-- Colorizer
 	{
 		"norcalli/nvim-colorizer.lua",
-		lazy = false,
-		priority = 900,
+		-- lazy = false,
+		-- priority = 900,
+		event = "VeryLazy",
 		config = function()
 			require("rc/pluginconf/nvim-colorizer")
 		end,
@@ -248,7 +258,7 @@ local plugins = {
 	-- Scrollbar
 	{
 		"petertriho/nvim-scrollbar",
-		event = "VimEnter",
+		event = { "BufNewFile", "BufRead" },
 		config = function()
 			require("rc/pluginconf/nvim-scrollbar")
 		end,
@@ -264,7 +274,7 @@ local plugins = {
 	-- Reading Assitant
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		event = "VimEnter",
+		event = { "BufNewFile", "BufRead" },
 		config = function()
 			require("rc/pluginconf/indent-blankline")
 		end,
@@ -282,7 +292,7 @@ local plugins = {
 	},
 	{
 		"yoshida-m-3/vim-im-select",
-		event = "VeryLazy",
+		event = "ModeChanged",
 		config = function()
 			require("rc/pluginconf/vim-im-select")
 		end,
@@ -320,28 +330,43 @@ local plugins = {
 	},
 
 	--------------------------------
+	-- Snippet
+	{
+		"L3MON4D3/LuaSnip",
+		event = "ModeChanged",
+		config = function()
+			require("rc/pluginconf/LuaSnip")
+		end,
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+		},
+	},
+	--------------------------------
 	-- Brackets
-	-- {
-	-- 	"hrsh7th/nvim-insx",
-	-- 	event = "VimEnter",
-	-- },
+	{
+		"hrsh7th/nvim-insx",
+		event = "VimEnter",
+		config = function ()
+			require("rc/pluginconf/nvim-insx")
+		end
+	},
 	-- {
 	-- 	"altermo/ultimate-autopair.nvim",
 	-- 	event = "VimEnter",
 	-- },
-	{
-		"altermo/npairs-integrate-upair",
-		event = "VimEnter",
-		config = function()
-			require("npairs-int-upair").setup({
-				bs = "u",
-			})
-		end,
-		dependencies = {
-			{ "windwp/nvim-autopairs" },
-			{ "altermo/ultimate-autopair.nvim" },
-		},
-	},
+	-- {
+	-- 	"altermo/npairs-integrate-upair",
+	-- 	event = "ModeChanged",
+	-- 	config = function()
+	-- 		require("npairs-int-upair").setup({
+	-- 			bs = "u",
+	-- 		})
+	-- 	end,
+	-- 	dependencies = {
+	-- 		{ "windwp/nvim-autopairs" },
+	-- 		{ "altermo/ultimate-autopair.nvim" },
+	-- 	},
+	-- },
 
 	----------------------------------------------------------------
 	-- Editing
@@ -379,7 +404,7 @@ local plugins = {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "main",
-		event = "BufEnter",
+		keys = "<leader>s",
 		config = function()
 			require("rc/pluginconf/neo-tree")
 		end,
@@ -389,28 +414,31 @@ local plugins = {
 	-- FuzzyFinder
 	{
 		"nvim-telescope/telescope.nvim",
-		event = { "VimEnter" },
+		-- event = { "VeryLazy" },
+		keys = "<leader>f",
 		config = function()
 			require("rc/pluginconf/telescope")
 		end,
 		dependencies = {
-			"nvim-lua/plenary.nvim",
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope-frecency.nvim" },
+			{ "nvim-telescope/telescope-file-browser.nvim" },
 		},
 	},
-	{
-		"nvim-telescope/telescope-frecency.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("telescope").load_extension("frecency")
-		end,
-	},
-	{
-		"nvim-telescope/telescope-file-browser.nvim",
-		event = "VeryLazy",
-		config = function ()
-			require("telescope").load_extension("file_browser")
-		end,
-	},
+	-- {
+	-- 	"nvim-telescope/telescope-frecency.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("telescope").load_extension("frecency")
+	-- 	end,
+	-- },
+	-- {
+	-- 	"nvim-telescope/telescope-file-browser.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = function ()
+	-- 		require("telescope").load_extension("file_browser")
+	-- 	end,
+	-- },
 
 	----------------------------------------------------------------
 	-- Standard Feature Enhancement
@@ -444,7 +472,7 @@ local plugins = {
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
-		config = function ()
+		config = function()
 			require("rc/pluginconf/noice")
 		end,
 		dependencies = {
@@ -454,23 +482,22 @@ local plugins = {
 	},
 	{
 		"hrsh7th/cmp-cmdline",
-		event = "VimEnter",
+		event = "ModeChanged",
 	},
 	{
 		"dmitmel/cmp-cmdline-history",
-		event = "VimEnter",
+		event = "ModeChanged",
 	},
 
 	----------------------------------------------------------------
 	-- Git
 	{
 		"lewis6991/gitsigns.nvim",
-		event = "VimEnter",
+		event = { "BufNewFile", "BufRead" },
 		config = function()
 			require("rc/pluginconf/gitsigns")
 		end,
 	},
-
 } -- Plugin List End
 
 require("lazy").setup(plugins, {

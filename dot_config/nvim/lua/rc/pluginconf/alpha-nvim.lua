@@ -36,8 +36,8 @@ dashboard.section.buttons.val = {
     dashboard.button("SPC f r", "  > Frecency/MRU"),
     dashboard.button("SPC f f", "  > Find file"),
     dashboard.button("SPC f g", "  > Find word"),
-    dashboard.button("SPC   c", "  > Configuration",":lua require('telescope').extensions.file_browser.file_browser({path='$NVIMCONF', previewer = false,initial_mode = 'normal', layout_config = { height = 40 }})<CR>"),
-    dashboard.button("SPC   i", "  > Plugin Install", ":PackerInstall<CR>"),
+    -- dashboard.button("SPC   c", "  > Configuration",":lua require('telescope').extensions.file_browser.file_browser({path='$NVIMCONF', previewer = false,initial_mode = 'normal', layout_config = { height = 40 }})<CR>"),
+    -- dashboard.button("SPC   i", "  > Plugin Install", ":PackerInstall<CR>"),
     dashboard.button("e", "  > New file" , ":ene <BAR> startinsert <CR>"),
     dashboard.button("q", "  > Quit", ":qa<CR>"),
 }
