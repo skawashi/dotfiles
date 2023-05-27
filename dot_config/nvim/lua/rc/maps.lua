@@ -26,9 +26,11 @@ keymap.set('n', '-', '<C-x>')
 
 -- New tab
 keymap.set('n', 'te', ':tabedit<Return>', { silent = true })
+
 -- Split Window
 keymap.set('n', '<C-w>s', ':split<Return><C-w>w', { silent = true })
 keymap.set('n', '<C-w>v', ':vsplit<Return><C-w>w', { silent = true })
+
 -- Move Window
 keymap.set('n', '<C-w>q', '<C-w>w')
 keymap.set('n', '<C-w><left>', '<C-w>h')
@@ -52,6 +54,10 @@ keymap.set('n', '<C-w>J', '<C-w>-')
 
 -- Reset highlihgt
 keymap.set('n', '<Esc><Esc>', '<Cmd>noh<CR>', { silent = true })
+
+-- Emacs like key bind
+keymap.set({'i', 'c'}, '<C-b>', '<left>')
+keymap.set({'i', 'c'}, '<C-f>', '<right>')
 
 -- Space + o or O でノーマルモードのまま空行挿入
 vim.cmd([[
