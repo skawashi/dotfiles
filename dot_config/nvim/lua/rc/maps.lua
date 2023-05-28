@@ -1,9 +1,7 @@
-local keymap = vim.keymap
-
 --Remap C-w as leader key
--- keymap.set('', '<C-w>', '<Nop>', opts)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+-- vim.keymap.set('', '<C-w>', '<Nop>', opts)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Modes
 --   normal_mode = 'n',
@@ -15,49 +13,49 @@ vim.g.maplocalleader = ' '
 --
 
 -- Do not yank with x
--- keymap.set('n', 'x', ''_x')
+-- vim.keymap.set('n', 'x', ''_x')
 
 -- Replace
-keymap.set('', '<C-h>', '<BS>')
+vim.keymap.set("", "<C-h>", "<BS>")
 
 -- Increment/decrement
-keymap.set('n', '+', '<C-a>')
-keymap.set('n', '-', '<C-x>')
+vim.keymap.set("n", "+", "<C-a>")
+vim.keymap.set("n", "-", "<C-x>")
 
 -- New tab
-keymap.set('n', 'te', ':tabedit<Return>', { silent = true })
+vim.keymap.set("n", "te", ":tabedit<Return>", { silent = true })
 
 -- Split Window
-keymap.set('n', '<C-w>s', ':split<Return><C-w>w', { silent = true })
-keymap.set('n', '<C-w>v', ':vsplit<Return><C-w>w', { silent = true })
+vim.keymap.set("n", "<C-w>-", ":split<Return><C-w>w", { silent = true })
+vim.keymap.set("n", "<C-w>\\", ":vsplit<Return><C-w>w", { silent = true })
 
 -- Move Window
-keymap.set('n', '<C-w>q', '<C-w>w')
-keymap.set('n', '<C-w><left>', '<C-w>h')
-keymap.set('n', '<C-w><right>', '<C-w>l')
-keymap.set('n', '<C-w><up>', '<C-w>k')
-keymap.set('n', '<C-w><down>', '<C-w>j')
-keymap.set('n', '<C-w>h', '<C-w>h')
-keymap.set('n', '<C-w>l', '<C-w>l')
-keymap.set('n', '<C-w>k', '<C-w>k')
-keymap.set('n', '<C-w>j', '<C-w>j')
+vim.keymap.set("n", "<C-w>q", "<C-w>w")
+vim.keymap.set("n", "<C-w><left>", "<C-w>h")
+vim.keymap.set("n", "<C-w><right>", "<C-w>l")
+vim.keymap.set("n", "<C-w><up>", "<C-w>k")
+vim.keymap.set("n", "<C-w><down>", "<C-w>j")
+vim.keymap.set("n", "<C-w>h", "<C-w>h")
+vim.keymap.set("n", "<C-w>l", "<C-w>l")
+vim.keymap.set("n", "<C-w>k", "<C-w>k")
+vim.keymap.set("n", "<C-w>j", "<C-w>j")
 
 -- Resize Window
-keymap.set('n', '<C-w><left>', '<C-w><')
-keymap.set('n', '<C-w><right>', '<C-w>>')
-keymap.set('n', '<C-w><up>', '<C-w>+')
-keymap.set('n', '<C-w><down>', '<C-w>-')
-keymap.set('n', '<C-w>H', '<C-w><')
-keymap.set('n', '<C-w>L', '<C-w>>')
-keymap.set('n', '<C-w>K', '<C-w>+')
-keymap.set('n', '<C-w>J', '<C-w>-')
+vim.keymap.set("n", "<C-w><left>", "<C-w><")
+vim.keymap.set("n", "<C-w><right>", "<C-w>>")
+vim.keymap.set("n", "<C-w><up>", "<C-w>+")
+vim.keymap.set("n", "<C-w><down>", "<C-w>-")
+vim.keymap.set("n", "<C-w>H", "<C-w><")
+vim.keymap.set("n", "<C-w>L", "<C-w>>")
+vim.keymap.set("n", "<C-w>K", "<C-w>+")
+vim.keymap.set("n", "<C-w>J", "<C-w>-")
 
 -- Reset highlihgt
-keymap.set('n', '<Esc><Esc>', '<Cmd>noh<CR>', { silent = true })
+vim.keymap.set("n", "<Esc><Esc>", "<Cmd>noh<CR>", { silent = true })
 
 -- Emacs like key bind
-keymap.set({'i', 'c'}, '<C-b>', '<left>')
-keymap.set({'i', 'c'}, '<C-f>', '<right>')
+vim.keymap.set({ "i", "c" }, "<C-b>", "<left>")
+vim.keymap.set({ "i", "c" }, "<C-f>", "<right>")
 
 -- Space + o or O でノーマルモードのまま空行挿入
 vim.cmd([[
