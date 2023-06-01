@@ -38,6 +38,13 @@ vim.opt.breakindent = true
 vim.opt.wildmenu = true
 vim.opt.wildmode = 'longest,list,full'
 
+-- Fold
+-- vim.o.foldmethod="marker"
+vim.opt.foldmethod = "manual"
+vim.opt.foldlevel = 1
+vim.opt.foldlevelstart = 99
+vim.w.foldcolumn = "0:"
+
 vim.cmd([[
 if has('persistent_undo')
   set undodir=~/.config/nvim/undo

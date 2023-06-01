@@ -1,6 +1,12 @@
 local noice = require("noice")
 
 noice.setup({
+	-- routes = {
+	-- 	filter = {
+	-- 		event = "msg_show",
+	-- 		max_width = 5,
+	-- 	},
+	-- },
 	popupmenu = {
 		backend = "cmp", -- backend to use to show regular cmdline completions
 	},

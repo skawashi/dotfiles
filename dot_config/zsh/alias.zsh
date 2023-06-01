@@ -9,7 +9,7 @@ alias vz='vim ${CHEZMOI_DIR}/dot_zshrc'
 alias vza='vim ${CHEZMOI_DIR}/dot_config/zsh/alias.zsh'
 alias vzi='vim ${CHEZMOI_DIR}/dot_config/zsh/init.zsh'
 alias vze='vim ${CHEZMOI_DIR}/dot_config/zsh/env.zsh'
-alias vvp='vim ${CHEZMOI_DIR}/dot_config/nvim/lua/plugins.lua'
+alias vvp='vim ${CHEZMOI_DIR}/dot_config/nvim/lua/rc/plugins.lua'
 alias vt='vim ${CHEZMOI_DIR}/dot_tmux.conf'
 alias vts='vim ${CHEZMOI_DIR}/dot_config/tmux/statusline.conf'
 alias vtu='vim ${CHEZMOI_DIR}/dot_config/tmux/utility.conf'
@@ -34,7 +34,7 @@ alias view='nvim -R'
 alias vimtime='vim --startuptime ./startup.log'
 
 ## normal command
-alias ls='exa'
+alias ls='exa --icons'
 alias l='ls'
 alias la='ls -a'
 alias lla='ls -la'
@@ -66,6 +66,7 @@ alias dp='docker ps'
 alias dpa='docker ps -a'
 alias drac='docker rm $(docker ps -aq)'
 alias drai='docker rmi $(docker images -q)'
+alias dce='docker compose exec '
 
 ## Pokemonsay
 alias poke="pokemonsay 'Welcome'"

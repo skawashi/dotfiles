@@ -1,4 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
@@ -41,6 +42,7 @@ local plugins = {
 	-- Font Library
 	{
 		"nvim-tree/nvim-web-devicons",
+		tag = "nerd-v2-compat",
 		config = function()
 			require("rc/pluginconf/nvim-web-devicons")
 		end,
@@ -55,6 +57,18 @@ local plugins = {
 			require("rc/pluginconf/dressing")
 		end,
 	},
+
+	--------------------------------
+	-- Notify
+
+	{
+		"rcarriga/nvim-notify",
+		event = "BufReadPre",
+		config = function()
+			require("rc/pluginconf/nvim-notify")
+		end,
+	},
+
 	----------------------------------------------------------------
 	-- Color Scheme
 	{
@@ -65,7 +79,7 @@ local plugins = {
 			require("rc/pluginconf/neosolarized")
 		end,
 		dependencies = {
-			"tjdevries/colorbuddy.nvim",
+			{ "tjdevries/colorbuddy.nvim" },
 		},
 	},
 
@@ -101,7 +115,7 @@ local plugins = {
 	-- Treesitter Textobject
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
-		event = "VeryLazy"
+		event = "VeryLazy",
 	},
 
 	--------------------------------
@@ -183,7 +197,7 @@ local plugins = {
 		end,
 		dependencies = {
 			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "hrsh7th/cmp-nvim-lsp-signature-help" },
+			-- { "hrsh7th/cmp-nvim-lsp-signature-help" },
 			{ "hrsh7th/cmp-nvim-lsp-document-symbol" },
 			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/cmp-path" },
@@ -238,8 +252,18 @@ local plugins = {
 			require("rc/pluginconf/bufferline")
 		end,
 		dependencies = {
-			"nvim-tree/nvim-web-devicons",
+			{ "nvim-tree/nvim-web-devicons" },
 		},
+	},
+
+	--------------------------------
+	-- Highlight
+	{
+		"xiyaowong/nvim-cursorword",
+		event = "BufRead",
+		config = function()
+			require("rc/pluginconf/nvim-cursorword")
+		end,
 	},
 
 	--------------------------------
@@ -248,7 +272,7 @@ local plugins = {
 		"norcalli/nvim-colorizer.lua",
 		-- lazy = false,
 		-- priority = 900,
-		event = "VeryLazy",
+		event = "BufReadPre",
 		config = function()
 			require("rc/pluginconf/nvim-colorizer")
 		end,
@@ -263,8 +287,18 @@ local plugins = {
 			require("rc/pluginconf/nvim-scrollbar")
 		end,
 		dependencies = {
-			"kevinhwang91/nvim-hlslens",
+			{ "kevinhwang91/nvim-hlslens" },
 		},
+	},
+
+	--------------------------------
+	-- Hover UI
+	{
+		"lewis6991/hover.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("rc/pluginconf/hover")
+		end,
 	},
 
 	----------------------------------------------------------------
@@ -279,7 +313,7 @@ local plugins = {
 			require("rc/pluginconf/indent-blankline")
 		end,
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
+			{ "nvim-treesitter/nvim-treesitter" },
 		},
 	},
 
@@ -297,13 +331,20 @@ local plugins = {
 			require("rc/pluginconf/vim-im-select")
 		end,
 	},
-	-- {
-	-- 	"ntpeters/vim-better-whitespace",
-	-- 	event = "VimLazy",
-	-- 	config = function ()
-	-- 		require("rc/pluginconf/vim-better-whitespace")
-	-- 	end,
-	-- },
+	{
+		"ntpeters/vim-better-whitespace",
+		event = "BufRead",
+		config = function()
+			-- require("rc/pluginconf/vim-better-whitespace.lua")
+			vim.cmd([[
+				let g:better_whitespace_operator='_s' " 削除コマンドのprefix変更
+				let g:strip_whitespace_on_save=1 " 保存時にスペース削除
+				let g:strip_whitespace_confirm=0 " 0:保存時にスペース削除の確認をしない
+				let g:better_whitespace_filetypes_blacklist = ['alpha', 'lspsagafinder']
+				autocmd FileType * EnableStripWhitespaceOnSave
+			]])
+		end,
+	},
 	{
 		"yutkat/wb-only-current-line.nvim",
 		event = "VeryLazy",
@@ -338,21 +379,21 @@ local plugins = {
 			require("rc/pluginconf/LuaSnip")
 		end,
 		dependencies = {
-			"rafamadriz/friendly-snippets",
+			{ "rafamadriz/friendly-snippets" },
 		},
 	},
 	--------------------------------
 	-- Brackets
 	{
 		"hrsh7th/nvim-insx",
-		event = "VimEnter",
-		config = function ()
+		event = "VeryLazy",
+		config = function()
 			require("rc/pluginconf/nvim-insx")
-		end
+		end,
 	},
 	-- {
 	-- 	"altermo/ultimate-autopair.nvim",
-	-- 	event = "VimEnter",
+	-- 	event = "VeryLazy",
 	-- },
 	-- {
 	-- 	"altermo/npairs-integrate-upair",
@@ -371,6 +412,52 @@ local plugins = {
 	----------------------------------------------------------------
 	-- Editing
 
+	--------------------------------
+	-- Move
+	{
+		"ggandor/leap.nvim",
+		-- lazy = false,
+		-- priority = 800,
+		event = "VeryLazy",
+		dependencies = {
+			{
+				"yutkat/leap-word.nvim",
+				config = function()
+					require("rc/pluginconf/leap-word")
+				end,
+			}
+		},
+		config = function()
+			require("rc/pluginconf/leap")
+		end,
+	},
+
+	--------------------------------
+	-- Horizontal Move
+	{
+		"jinh0/eyeliner.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("rc/pluginconf/eyeliner")
+		end,
+	},
+	-- {
+	-- 	"ggandor/flit.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("rc/pluginconf/flit")
+	-- 	end,
+	-- 	dependencies = {
+	-- 		{	"ggandor/leap.nvim" },
+	-- 	},
+	-- },
+	{
+		"chrisgrieser/nvim-spider",
+		event = "VeryLazy",
+		config = function()
+			require("rc/pluginconf/nvim-spider")
+		end,
+	},
 	--------------------------------
 	-- Operater
 	{
@@ -403,11 +490,16 @@ local plugins = {
 	-- Filer
 	{
 		"nvim-neo-tree/neo-tree.nvim",
-		branch = "main",
+		branch = "v2.x",
 		keys = "<leader>s",
 		config = function()
 			require("rc/pluginconf/neo-tree")
 		end,
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-tree/nvim-web-devicons" }, -- not strictly required, but recommended
+			{ "MunifTanjim/nui.nvim" },
+		},
 	},
 
 	--------------------------------
@@ -415,6 +507,7 @@ local plugins = {
 	{
 		"nvim-telescope/telescope.nvim",
 		-- event = { "VeryLazy" },
+		tag = "0.1.1",
 		keys = "<leader>f",
 		config = function()
 			require("rc/pluginconf/telescope")
@@ -441,6 +534,19 @@ local plugins = {
 	-- },
 
 	----------------------------------------------------------------
+	-- Terminal
+
+	--------------------------------
+	-- Terminal Multiplexer
+	{
+		"alexghergh/nvim-tmux-navigation",
+		event = "BufRead",
+		config = function()
+			require("rc/pluginconf/nvim-tmux-navigation")
+		end,
+	},
+
+	----------------------------------------------------------------
 	-- Standard Feature Enhancement
 
 	--------------------------------
@@ -448,6 +554,21 @@ local plugins = {
 	{
 		"tpope/vim-repeat",
 		event = "VeryLazy",
+	},
+
+	--------------------------------
+	-- Fold
+	{
+		"kevinhwang91/nvim-ufo",
+		event = "BufRead",
+		config = function()
+			require("rc/pluginconf/nvim-ufo")
+		end,
+		dependencies = {
+			{ "kevinhwang91/promise-async" },
+			{ "neovim/nvim-lspconfig" },
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
 	},
 
 	--------------------------------

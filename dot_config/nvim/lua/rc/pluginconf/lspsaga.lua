@@ -7,7 +7,7 @@ lspsaga.setup({
 	-- },
 	ui = {
 		code_action = "",
-		diagnostic = " ",
+		diagnostic = "",
 		border = "double",
 	},
 	lightbulb = {

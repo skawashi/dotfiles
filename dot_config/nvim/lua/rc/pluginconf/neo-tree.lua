@@ -1,9 +1,9 @@
 local neo_tree = require("neo-tree")
-local utils = require('neo-tree.utils')
+local utils = require("neo-tree.utils")
 
 neo_tree.setup({
-	close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
-	popup_border_style = 'rounded',
+	close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
+	popup_border_style = "rounded",
 	enable_git_status = true,
 	enable_diagnostics = true,
 	default_component_configs = {
@@ -14,32 +14,32 @@ neo_tree.setup({
 			indent_size = 2,
 			padding = 1, -- extra padding on left hand side
 			with_markers = true,
-			indent_marker = '│',
-			last_indent_marker = '└',
-			highlight = 'NeoTreeIndentMarker',
+			indent_marker = "│",
+			last_indent_marker = "└",
+			highlight = "NeoTreeIndentMarker",
 		},
 		icon = {
-			folder_closed = '',
-			folder_open = '',
-			folder_empty = 'ﰊ',
-			default = '*',
+			folder_closed = "",
+			folder_open = "",
+			folder_empty = "ﰊ",
+			default = "*",
 		},
 		name = {
 			trailing_slash = false,
 			use_git_status_colors = true,
 		},
 		git_status = {
-			highlight = 'NeoTreeDimText', -- if you remove this the status will be colorful
+			highlight = "NeoTreeDimText", -- if you remove this the status will be colorful
 		},
 	},
 	event_handlers = {
-		{
-			event = 'file_opened',
-			handler = function(file_path)
+		-- {
+		-- 	event = "file_opened",
+		-- 	handler = function(file_path)
 				--auto close
-				neo_tree.close_all()
-			end,
-		},
+				-- neo_tree.close_all()
+		-- 	end,
+		-- },
 		-- {
 		-- 	event = 'file_added',
 		-- 	handler = function(file_path)
@@ -53,8 +53,8 @@ neo_tree.setup({
 			hide_dotfiles = false,
 			hide_gitignored = true,
 			hide_by_name = {
-				'.DS_Store',
-				'thumbs.db',
+				".DS_Store",
+				"thumbs.db",
 				--'node_modules'
 			},
 			never_show = { -- remains hidden even if visible is toggled to true
@@ -66,112 +66,112 @@ neo_tree.setup({
 		-- time the current file is changed while the tree is open.
 		use_libuv_file_watcher = false, -- This will use the OS level file watchers
 		-- to detect changes instead of relying on nvim autocmd events.
-		hijack_netrw_behavior = 'open_default', -- netrw disabled, opening a directory opens neo-tree
+		hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
 		-- in whatever position is specified in window.position
 		-- 'open_split',  -- netrw disabled, opening a directory opens within the
 		-- window like netrw would, regardless of window.position
 		-- 'disabled',    -- netrw left alone, neo-tree does not handle opening dirs
 		window = {
-			position = 'left',
+			position = "left",
 			width = 30,
 			mappings = {
-				['<2-LeftMouse>'] = 'open',
-				['<cr>'] = 'open',
-				['S'] = 'open_split',
-				['s'] = 'open_vsplit',
-				['C'] = 'close_node',
-				['<bs>'] = 'navigate_up',
-				['.'] = 'set_root',
-				['H'] = 'toggle_hidden',
-				['I'] = 'toggle_gitignore',
-				['R'] = 'refresh',
-				['/'] = 'fuzzy_finder',
+				["<2-LeftMouse>"] = "open",
+				["<cr>"] = "open",
+				["S"] = "open_split",
+				["s"] = "open_vsplit",
+				["C"] = "close_node",
+				["<bs>"] = "navigate_up",
+				["."] = "set_root",
+				["H"] = "toggle_hidden",
+				["I"] = "toggle_gitignore",
+				["R"] = "refresh",
+				["/"] = "fuzzy_finder",
 				--['/'] = 'filter_as_you_type', -- this was the default until v1.28
 				--['/'] = 'none' -- Assigning a key to 'none' will remove the default mapping
-				['f'] = 'filter_on_submit',
-				['<c-x>'] = 'clear_filter',
-				['a'] = 'add',
-				['d'] = 'delete',
-				['r'] = 'rename',
-				['y'] = 'copy_to_clipboard',
-				['x'] = 'cut_to_clipboard',
-				['p'] = 'paste_from_clipboard',
-				['m'] = 'move', -- takes text input for destination
-				['q'] = 'close_window',
+				["f"] = "filter_on_submit",
+				["<c-x>"] = "clear_filter",
+				["a"] = "add",
+				["d"] = "delete",
+				["r"] = "rename",
+				["y"] = "copy_to_clipboard",
+				["x"] = "cut_to_clipboard",
+				["p"] = "paste_from_clipboard",
+				["m"] = "move", -- takes text input for destination
+				["q"] = "close_window",
 			},
 		},
 	},
 	buffers = {
 		show_unloaded = true,
 		window = {
-			position = 'left',
+			position = "left",
 			mappings = {
-				['<2-LeftMouse>'] = 'open',
-				['<cr>'] = 'open',
-				['S'] = 'open_split',
-				['s'] = 'open_vsplit',
-				['<bs>'] = 'navigate_up',
-				['.'] = 'set_root',
-				['R'] = 'refresh',
-				['a'] = 'add',
-				['d'] = 'delete',
-				['r'] = 'rename',
-				['y'] = 'copy_to_clipboard',
-				['x'] = 'cut_to_clipboard',
-				['p'] = 'paste_from_clipboard',
-				['bd'] = 'buffer_delete',
+				["<2-LeftMouse>"] = "open",
+				["<cr>"] = "open",
+				["S"] = "open_split",
+				["s"] = "open_vsplit",
+				["<bs>"] = "navigate_up",
+				["."] = "set_root",
+				["R"] = "refresh",
+				["a"] = "add",
+				["d"] = "delete",
+				["r"] = "rename",
+				["y"] = "copy_to_clipboard",
+				["x"] = "cut_to_clipboard",
+				["p"] = "paste_from_clipboard",
+				["bd"] = "buffer_delete",
 			},
 		},
 	},
 	git_status = {
 		window = {
-			position = 'float',
+			position = "float",
 			mappings = {
-				['<2-LeftMouse>'] = 'open',
-				['<cr>'] = 'open',
-				['S'] = 'open_split',
-				['s'] = 'open_vsplit',
-				['C'] = 'close_node',
-				['R'] = 'refresh',
-				['d'] = 'delete',
-				['r'] = 'rename',
-				['y'] = 'copy_to_clipboard',
-				['x'] = 'cut_to_clipboard',
-				['p'] = 'paste_from_clipboard',
-				['A'] = 'git_add_all',
-				['gu'] = 'git_unstage_file',
-				['ga'] = 'git_add_file',
-				['gr'] = 'git_revert_file',
-				['gc'] = 'git_commit',
-				['gp'] = 'git_push',
-				['gg'] = 'git_commit_and_push',
+				["<2-LeftMouse>"] = "open",
+				["<cr>"] = "open",
+				["S"] = "open_split",
+				["s"] = "open_vsplit",
+				["C"] = "close_node",
+				["R"] = "refresh",
+				["d"] = "delete",
+				["r"] = "rename",
+				["y"] = "copy_to_clipboard",
+				["x"] = "cut_to_clipboard",
+				["p"] = "paste_from_clipboard",
+				["A"] = "git_add_all",
+				["gu"] = "git_unstage_file",
+				["ga"] = "git_add_file",
+				["gr"] = "git_revert_file",
+				["gc"] = "git_commit",
+				["gp"] = "git_push",
+				["gg"] = "git_commit_and_push",
 			},
 		},
 	},
 	renderers = {
 		directory = {
-			{ 'indent' },
-			{ 'icon' },
-			{ 'current_filter' },
-			{ 'name' },
-			{ 'clipboard' },
-			{ 'diagnostics', errors_only = true },
+			{ "indent" },
+			{ "icon" },
+			{ "current_filter" },
+			{ "name" },
+			{ "clipboard" },
+			{ "diagnostics", errors_only = true },
 		},
 		file = {
-			{ 'indent' },
-			{ 'icon' },
+			{ "indent" },
+			{ "icon" },
 			{
-				'name',
+				"name",
 				use_git_status_colors = true,
 				zindex = 10,
 			},
-			{ 'clipboard' },
-			{ 'bufnr' },
-			{ 'modified' },
-			{ 'diagnostics' },
-			{ 'git_status' },
+			{ "clipboard" },
+			{ "bufnr" },
+			{ "modified" },
+			{ "diagnostics" },
+			{ "git_status" },
 		},
 	},
 })
-vim.keymap.set('n', '<leader>s', '<Cmd>NeoTreeRevealToggle<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', 'gs', '<Cmd>NeoTreeFloatToggle git_status<CR>', { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>s", "<Cmd>NeoTreeRevealToggle<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "gs", "<Cmd>NeoTreeFloatToggle git_status<CR>", { noremap = true, silent = true })

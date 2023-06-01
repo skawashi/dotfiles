@@ -45,8 +45,8 @@ indent.setup({
 })
 vim.cmd("let g:indent_blankline_char = '▏'") -- indent char
 vim.cmd("let g:indent_blankline_context_char = '▏'") -- emphasis indent char
-vim.cmd("let g:indent_blankline_char_blankline = ' '") -- char behind space
-vim.cmd("let g:indent_blankline_show_first_indent_level = v:false")
+vim.cmd("let g:indent_blankline_char_blankline = '▏'") -- char behind space
+vim.cmd("let g:indent_blankline_show_first_indent_level = v:true")
 -- vim.cmd("let g:indent_blankline_use_treesitter = v:true")
 -- vim.cmd("let g:indent_blankline_show_current_context = v:true")
 -- vim.cmd("let g:indent_blankline_show_current_context_start = v:true")

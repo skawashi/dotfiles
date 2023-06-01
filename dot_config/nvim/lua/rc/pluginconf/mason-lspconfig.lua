@@ -29,49 +29,51 @@ local on_attach = function(client, bufnr)
 end
 
 -- Set up completion using nvim_cmp with LSP source
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local ok_cmp_nvim_lsp, _ = pcall(require, "cmp_nvim_lsp")
+if ok_cmp_nvim_lsp then
 
-mason_lspconfig.setup_handlers({
-  function(server)
-    lspconfig[server].setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-    })
-  end,
+	local capabilities = require("cmp_nvim_lsp").default_capabilities()
+	mason_lspconfig.setup_handlers({
+		function(server)
+			lspconfig[server].setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+		end,
 
-  ['intelephense'] = function ()
-    lspconfig.intelephense.setup({
-      on_attach = on_attach,
-      capabilities = capabilities,
-      settings = {
-        intelephense = {
-          files = {
-            exclude = {
-              "**/.git/**",
-              "**/.svn/**",
-              "**/.hg/**",
-              "**/CVS/**",
-              "**/.DS_Store/**",
-              "**/node_modules/**",
-              "**/bower_components/**",
-              "**/vendor/**/{Tests,tests}/**",
-              "**/.history/**",
-              "**/vendor/**/vendor/**",
-              "**/*.blade.php",
-            }
-          },
-          -- for Laravel config
-          diagnostics = {
-              undefinedClassConstants = false,
-              undefinedConstants = false,
-              undefinedFunctions = false,
-              undefinedMethods = false,
-              undefinedProperties = false,
-              undefinedTypes = false,
-          }
-        }
-      }
-    })
-  end
-})
-
+		["intelephense"] = function()
+			lspconfig.intelephense.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				settings = {
+					intelephense = {
+						files = {
+							exclude = {
+								"**/.git/**",
+								"**/.svn/**",
+								"**/.hg/**",
+								"**/CVS/**",
+								"**/.DS_Store/**",
+								"**/node_modules/**",
+								"**/bower_components/**",
+								"**/vendor/**/{Tests,tests}/**",
+								"**/.history/**",
+								"**/vendor/**/vendor/**",
+								"**/*.blade.php",
+							},
+						},
+						-- for Laravel config
+						diagnostics = {
+							undefinedClassConstants = false,
+							undefinedConstants = false,
+							undefinedFunctions = false,
+							undefinedMethods = false,
+							undefinedProperties = false,
+							undefinedTypes = false,
+						},
+					},
+				},
+			})
+		end,
+	})
+end

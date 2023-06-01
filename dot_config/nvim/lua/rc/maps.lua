@@ -39,6 +39,10 @@ vim.keymap.set("n", "<C-w>h", "<C-w>h")
 vim.keymap.set("n", "<C-w>l", "<C-w>l")
 vim.keymap.set("n", "<C-w>k", "<C-w>k")
 vim.keymap.set("n", "<C-w>j", "<C-w>j")
+vim.keymap.set("n", "<C-h>", "<C-w>h")
+vim.keymap.set("n", "<C-l>", "<C-w>l")
+vim.keymap.set("n", "<C-k>", "<C-w>k")
+vim.keymap.set("n", "<C-j>", "<C-w>j")
 
 -- Resize Window
 vim.keymap.set("n", "<C-w><left>", "<C-w><")

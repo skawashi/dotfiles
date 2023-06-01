@@ -1,4 +1,4 @@
--- require("insx.preset.standard").setup({})
+require("insx.preset.standard").setup({})
 local insx = require("insx")
 local esc = require("insx.helper.regex").esc
 
