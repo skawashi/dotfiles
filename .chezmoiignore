@@ -1,0 +1,3 @@
+# 基本的には.config以下を追跡しないようにしておき、
+# 必要なものを!.config/tmux/tmux.conf のように追加していく[]
+.config/*
