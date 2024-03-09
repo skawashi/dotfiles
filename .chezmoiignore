@@ -1,3 +1,9 @@
-# 基本的には.config以下を追跡しないようにしておき、
-# 必要なものを!.config/tmux/tmux.conf のように追加していく[]
-.config/*
+**/*.bk
+
+# zsh
+.config/zsh/.zsh_history
+.config/zsh/.zcompdump*
+.config/zsh/local.zsh
+
+# nvim
+.config/nvim/undo

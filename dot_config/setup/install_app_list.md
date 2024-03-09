@@ -1,0 +1,12 @@
+- sidekick
+- visual-studio-code
+- google-japanese-ime
+- iterm2
+- docker
+- raycast
+- 1password
+- cmd-eikana
+- zoom
+- postman
+- alt-tab
+- ngrok

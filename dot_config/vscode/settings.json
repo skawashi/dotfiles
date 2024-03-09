@@ -1,0 +1,96 @@
+{
+    // ===========================================
+    // vscode-neovim setting
+    // ===========================================
+    "vscode-neovim.highlightGroups.highlights": {
+        "IncSearch": {
+            "backgroundColor": "theme.editor.findMatchBackground",
+            "borderColor": "theme.editor.findMatchBorder"
+        },
+        "Search": {
+            "backgroundColor": "theme.editor.findMatchHighlightBackground",
+            "borderColor": "theme.editor.findMatchHighlightBorder"
+        },
+        "Visual": {
+            "backgroundColor": "theme.editor.selectionBackground"
+        }
+    },
+    "vscode-neovim.neovimExecutablePaths.darwin": "/Users/shun_ts/nvim-macos/bin/nvim", // Neovimの絶対パス
+
+    // ===========================================
+    // terminal setting
+    // ===========================================
+    "terminal.integrated.fontFamily": "MesloLGS NF", // ターミナル部フォント
+
+    // ===========================================
+    // editor setting
+    // ===========================================
+    "workbench.editor.showTabs": "multiple", // ファイルのタブを表示
+    "workbench.colorTheme": "Tokyo Night Ported Nvim", // カラーテーマ
+    "workbench.colorCustomizations": {
+        "editorBracketHighlight.foreground1": "#cc241d", // 赤
+        "editorBracketHighlight.foreground2": "#d65d0e", // 橙
+        "editorBracketHighlight.foreground3": "#d79921", // 黄
+        "editorBracketHighlight.foreground4": "#689d6a", // 緑
+        "editorBracketHighlight.foreground5": "#458588", // 青
+        "editorBracketHighlight.foreground6": "#b16286"  // 紫
+    },
+
+    "editor.fontSize": 16, // エディター部フォントサイズ
+    "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace", // エディター部フォント
+    "editor.wordWrap": "on", // 閾値を超えたとき、複数行にわたって表示する
+    "editor.wordWrapColumn": 100, //　上の閾値設定
+    "editor.autoClosingBrackets": "always",
+    "editor.lineNumbers": "relative", // 行番号の表示設定 on→絶対行 relative->相対行 interval->一定行毎
+    "editor.renderControlCharacters": true,
+    "editor.minimap.enabled": false,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+
+    "indentRainbow.indicatorStyle": "light",
+    "indentRainbow.colors": [
+        "rgba(204,36,30,0.07)",
+        "rgba(230,94,15,0.07)",
+        "rgba(255,255,255,0.07)",
+        "rgba(79,236,236,0.07)"
+    ],
+    "editor.fontLigatures": true,
+    "editor.cursorBlinking": "solid",
+    "editor.autoClosingDelete": "always",
+    "editor.autoClosingQuotes": "always",
+    "editor.autoClosingOvertype": "always",
+    "editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?",
+    "explorer.compactFolders": false,
+
+    // sidebar setting
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.startupEditor": "none",
+    "php.validate.executablePath": "",
+
+    // Other
+    // workspace
+    "workspaceExplorer.workspaceStorageDirectory": "/Users/shun_ts/Desktop/workspace",
+
+    // terminal setting
+    "terminal.integrated.fontSize": 14,
+
+    // Prettier Setting
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "eslint.format.enable": false,
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "editor.accessibilitySupport": "off",
+    "prettier.tabWidth": 4,
+    "launch": {
+        "configurations": [],
+        "compounds": []
+    }
+}
