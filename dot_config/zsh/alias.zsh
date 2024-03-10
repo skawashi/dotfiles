@@ -1,8 +1,8 @@
-#################
-# Alias setting #
-#################
+# ---------------
+# Alias setting
+# ---------------
 ## .zshrc 読み込み
-alias z='source ~/.zshrc'
+alias zz='source ~/.config/zsh/.zshrc'
 
 ## confing file edit
 alias vz='vim ${CHEZMOI_DIR}/dot_zshrc'
@@ -24,7 +24,7 @@ alias ttt='tmux a -d'
 alias tkl='tmux kill-session -t'
 alias tkla='tmux kill-server'
 alias tls='tmux ls'
-alias tm='tmuximum'
+# alias tm='tmuximum'
 
 ## EDITOR
 alias vi='vi'
@@ -44,6 +44,7 @@ alias cp='\cp -i'
 alias cat='bat'
 alias c='bat'
 alias cl='clear'
+alias grep="rg"
 
 ## Git command
 alias ga='git add'
@@ -77,4 +78,3 @@ alias n="ngrok"
 
 ## available command
 # neofetch
-

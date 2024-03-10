@@ -1,8 +1,3 @@
---Remap C-w as leader key
--- vim.keymap.set('', '<C-w>', '<Nop>', opts)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- Modes
 --   normal_mode = 'n',
 --   insert_mode = 'i',
@@ -12,11 +7,14 @@ vim.g.maplocalleader = " "
 --   command_mode = 'c',
 --
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 -- Do not yank with x
 -- vim.keymap.set('n', 'x', ''_x')
 
 -- Replace
-vim.keymap.set("", "<C-h>", "<BS>")
+vim.keymap.set("n", "<C-h>", "<BS>")
 
 -- Increment/decrement
 vim.keymap.set("n", "+", "<C-a>")

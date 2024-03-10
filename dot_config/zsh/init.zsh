@@ -36,5 +36,6 @@ bindkey \^U backward-kill-line # ctrl+u で行頭からカーソル前まで削�
 # そうでなければ、xterm-256color
 if [[ -n ${TMUX-} ]];then
     export TERM=tmux-256color
+else
+    export TERM=wezterm
 fi
-

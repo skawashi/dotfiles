@@ -1,0 +1,9 @@
+**/*.bk
+
+# zsh
+.config/zsh/.zsh_history
+.config/zsh/.zcompdump*
+.config/zsh/local.zsh
+
+# nvim
+.config/nvim/undo

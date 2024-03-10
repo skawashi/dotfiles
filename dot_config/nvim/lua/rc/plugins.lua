@@ -10,9 +10,12 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	})
 end
+
 vim.opt.rtp:prepend(lazypath)
 
-local plugins = {
+local plugins
+
+plugins = {
 	----------------------------------------------------------------
 	-- Installer
 	{ "folke/lazy.nvim" },
@@ -24,7 +27,7 @@ local plugins = {
 		event = { "BufReadPre", "VeryLazy" },
 		build = ":MasonUpdate",
 		config = function()
-			require("rc/pluginconf/mason")
+			require("rc/pluginconfig/mason")
 		end,
 	},
 
@@ -44,7 +47,7 @@ local plugins = {
 		"nvim-tree/nvim-web-devicons",
 		tag = "nerd-v2-compat",
 		config = function()
-			require("rc/pluginconf/nvim-web-devicons")
+			require("rc/pluginconfig/nvim-web-devicons")
 		end,
 	},
 
@@ -54,7 +57,7 @@ local plugins = {
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("rc/pluginconf/dressing")
+			require("rc/pluginconfig/dressing")
 		end,
 	},
 
@@ -65,7 +68,7 @@ local plugins = {
 		"rcarriga/nvim-notify",
 		event = "BufReadPre",
 		config = function()
-			require("rc/pluginconf/nvim-notify")
+			require("rc/pluginconfig/nvim-notify")
 		end,
 	},
 
@@ -76,7 +79,7 @@ local plugins = {
 		lazy = false,
 		priority = 1000,
 		config = function()
-			require("rc/pluginconf/neosolarized")
+			require("rc/pluginconfig/neosolarized")
 		end,
 		dependencies = {
 			{ "tjdevries/colorbuddy.nvim" },
@@ -92,19 +95,19 @@ local plugins = {
 		event = "BufReadPost",
 		build = ":TSUpdateSync",
 		config = function()
-			require("rc/pluginconf/nvim-treesitter")
+			require("rc/pluginconfig/nvim-treesitter")
 		end,
 		dependencies = {
 			{ "JoosepAlviste/nvim-ts-context-commentstring" },
 			{ "nvim-treesitter/nvim-treesitter-refactor" },
 			{ "nvim-treesitter/nvim-tree-docs" },
 			{ "yioneko/nvim-yati" },
-			{ "mrjones2014/nvim-ts-rainbow" },
+			-- { "mrjones2014/nvim-ts-rainbow" },
 			{ "andymass/vim-matchup" },
 			{
 				"windwp/nvim-ts-autotag",
 				config = function()
-					require("rc/pluginconf/nvim-ts-autotag")
+					require("rc/pluginconfig/nvim-ts-autotag")
 				end,
 			},
 			{ "RRethy/nvim-treesitter-endwise" },
@@ -121,13 +124,25 @@ local plugins = {
 	--------------------------------
 	-- Treesitter UI Customize
 	{
+		"HiPhish/rainbow-delimiters.nvim",
+		event = "BufReadPost",
+		config = function()
+			-- patch https://github.com/nvim-treesitter/nvim-treesitter/issues/1124
+			vim.cmd.edit({ bang = true })
+		end,
+	},
+	{
 		"m-demare/hlargs.nvim",
 		event = { "BufNewFile", "BufRead" },
 		config = function()
-			require("rc/pluginconf/hlargs")
+			require("rc/pluginconfig/hlargs")
 		end,
 	},
-
+	{
+		"romgrk/nvim-treesitter-context",
+		cmd = { "TSContextEnable" },
+		config = true,
+	},
 	----------------------------------------------------------------
 	-- LSP & Completion
 
@@ -136,14 +151,17 @@ local plugins = {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			require("rc/pluginconf/nvim-lspconfig")
+			require("rc/pluginconfig/nvim-lspconfig")
 		end,
+		dependencies = {
+			"princejoogie/tailwind-highlight.nvim",
+		},
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
 		event = "BufReadPre",
 		config = function()
-			require("rc/pluginconf/mason-lspconfig")
+			require("rc/pluginconfig/mason-lspconfig")
 		end,
 		dependencies = {
 			{
@@ -157,11 +175,13 @@ local plugins = {
 	-- LSP's UI
 	{
 		"nvimdev/lspsaga.nvim",
-		event = "VeryLazy",
+		event = "LspAttach",
+		-- commit = "a224b2a", -- maybe sable version
 		config = function()
-			require("rc/pluginconf/lspsaga")
+			require("rc/pluginconfig/lspsaga")
 		end,
 		dependencies = {
+			-- { "neovim/nvim-lspconfig" },
 			{ "nvim-tree/nvim-web-devicons" },
 			{ "nvim-treesitter/nvim-treesitter" },
 		},
@@ -170,7 +190,7 @@ local plugins = {
 		"folke/lsp-colors.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("rc/pluginconf/lsp-colors")
+			require("rc/pluginconfig/lsp-colors")
 		end,
 	},
 	{
@@ -180,9 +200,10 @@ local plugins = {
 	},
 	{
 		"j-hui/fidget.nvim",
+		tag = "legacy",
 		event = "LspAttach",
 		config = function()
-			require("rc/pluginconf/fidget")
+			require("rc/pluginconfig/fidget")
 		end,
 	},
 
@@ -193,7 +214,7 @@ local plugins = {
 		event = "InsertEnter",
 		keys = ":",
 		config = function()
-			require("rc/pluginconf/nvim-cmp")
+			require("rc/pluginconfig/nvim-cmp")
 		end,
 		dependencies = {
 			{ "hrsh7th/cmp-nvim-lsp" },
@@ -215,7 +236,7 @@ local plugins = {
 			{
 				"onsails/lspkind-nvim",
 				config = function()
-					require("rc/pluginconf/lspkind-nvim")
+					require("rc/pluginconfig/lspkind-nvim")
 				end,
 			},
 		},
@@ -229,7 +250,7 @@ local plugins = {
 		"goolord/alpha-nvim",
 		event = "BufEnter",
 		config = function()
-			require("rc/pluginconf/alpha-nvim")
+			require("rc/pluginconfig/alpha-nvim")
 		end,
 	},
 
@@ -239,7 +260,7 @@ local plugins = {
 		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("rc/pluginconf/lualine")
+			require("rc/pluginconfig/lualine")
 		end,
 	},
 
@@ -249,7 +270,7 @@ local plugins = {
 		"akinsho/nvim-bufferline.lua",
 		event = "VeryLazy",
 		config = function()
-			require("rc/pluginconf/bufferline")
+			require("rc/pluginconfig/bufferline")
 		end,
 		dependencies = {
 			{ "nvim-tree/nvim-web-devicons" },
@@ -262,10 +283,16 @@ local plugins = {
 		"xiyaowong/nvim-cursorword",
 		event = "BufRead",
 		config = function()
-			require("rc/pluginconf/nvim-cursorword")
+			require("rc/pluginconfig/nvim-cursorword")
 		end,
 	},
-
+	{
+		"folke/todo-comments.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("rc/pluginconfig/todo-comments")
+		end,
+	},
 	--------------------------------
 	-- Colorizer
 	{
@@ -274,7 +301,7 @@ local plugins = {
 		-- priority = 900,
 		event = "BufReadPre",
 		config = function()
-			require("rc/pluginconf/nvim-colorizer")
+			require("rc/pluginconfig/nvim-colorizer")
 		end,
 	},
 
@@ -284,7 +311,7 @@ local plugins = {
 		"petertriho/nvim-scrollbar",
 		event = { "BufNewFile", "BufRead" },
 		config = function()
-			require("rc/pluginconf/nvim-scrollbar")
+			require("rc/pluginconfig/nvim-scrollbar")
 		end,
 		dependencies = {
 			{ "kevinhwang91/nvim-hlslens" },
@@ -297,7 +324,7 @@ local plugins = {
 		"lewis6991/hover.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("rc/pluginconf/hover")
+			require("rc/pluginconfig/hover")
 		end,
 	},
 
@@ -308,9 +335,10 @@ local plugins = {
 	-- Reading Assitant
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
 		event = { "BufNewFile", "BufRead" },
 		config = function()
-			require("rc/pluginconf/indent-blankline")
+			require("rc/pluginconfig/indent-blankline")
 		end,
 		dependencies = {
 			{ "nvim-treesitter/nvim-treesitter" },
@@ -324,21 +352,30 @@ local plugins = {
 		event = { "BufNewFile", "BufReadPre" },
 		config = true,
 	},
+
+	-- you need to install im-select in pc.
+	-- {
+	-- 	"yoshida-m-3/vim-im-select",
+	-- 	event = "ModeChanged",
+	-- 	config = function()
+	-- 		require("rc/pluginconfig/vim-im-select")
+	-- 	end,
+	-- },
 	{
-		"yoshida-m-3/vim-im-select",
+		"keaising/im-select.nvim",
 		event = "ModeChanged",
 		config = function()
-			require("rc/pluginconf/vim-im-select")
+			require("rc/pluginconfig/im-select")
 		end,
 	},
 	{
 		"ntpeters/vim-better-whitespace",
 		event = "BufRead",
 		config = function()
-			-- require("rc/pluginconf/vim-better-whitespace.lua")
+			-- require("rc/pluginconfig/vim-better-whitespace.lua")
 			vim.cmd([[
 				let g:better_whitespace_operator='_s' " 削除コマンドのprefix変更
-				let g:strip_whitespace_on_save=1 " 保存時にスペース削除
+				let g:strip_whitespace_on_save=0 " 保存時にスペース削除
 				let g:strip_whitespace_confirm=0 " 0:保存時にスペース削除の確認をしない
 				let g:better_whitespace_filetypes_blacklist = ['alpha', 'lspsagafinder']
 				autocmd FileType * EnableStripWhitespaceOnSave
@@ -356,7 +393,7 @@ local plugins = {
 		"numToStr/Comment.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("rc/pluginconf/Comment")
+			require("rc/pluginconfig/Comment")
 		end,
 	},
 
@@ -366,7 +403,7 @@ local plugins = {
 		"jose-elias-alvarez/null-ls.nvim",
 		event = "LspAttach",
 		config = function()
-			require("rc/pluginconf/null-ls")
+			require("rc/pluginconfig/null-ls")
 		end,
 	},
 
@@ -376,21 +413,33 @@ local plugins = {
 		"L3MON4D3/LuaSnip",
 		event = "ModeChanged",
 		config = function()
-			require("rc/pluginconf/LuaSnip")
+			require("rc/pluginconfig/LuaSnip")
 		end,
 		dependencies = {
 			{ "rafamadriz/friendly-snippets" },
+			{ "burkeholland/simple-react-snippets" },
 		},
 	},
 	--------------------------------
 	-- Brackets
 	{
+		'windwp/nvim-autopairs',
+		event = "InsertEnter",
+		config = function ()
+			require("rc/pluginconfig/nvim-autopairs")
+		end
+	},
+
+	--------------------------------
+	-- html tag fast brake
+	{
 		"hrsh7th/nvim-insx",
-		event = "VeryLazy",
+		event = "InsertEnter",
 		config = function()
-			require("rc/pluginconf/nvim-insx")
+			require("rc/pluginconfig/nvim-insx")
 		end,
 	},
+
 	-- {
 	-- 	"altermo/ultimate-autopair.nvim",
 	-- 	event = "VeryLazy",
@@ -414,38 +463,44 @@ local plugins = {
 
 	--------------------------------
 	-- Move
+	-- {
+	-- 	"ggandor/leap.nvim",
+	-- 	-- lazy = false,
+	-- 	-- priority = 800,
+	-- 	event = "VeryLazy",
+	-- 	dependencies = {
+	-- 		{
+	-- 			"yutkat/leap-word.nvim",
+	-- 			config = function()
+	-- 				require("rc/pluginconfig/leap-word")
+	-- 			end,
+	-- 		},
+	-- 	},
+	-- 	config = function()
+	-- 		require("rc/pluginconfig/leap")
+	-- 	end,
+	-- },
 	{
-		"ggandor/leap.nvim",
-		-- lazy = false,
-		-- priority = 800,
+		"folke/flash.nvim",
 		event = "VeryLazy",
-		dependencies = {
-			{
-				"yutkat/leap-word.nvim",
-				config = function()
-					require("rc/pluginconf/leap-word")
-				end,
-			}
-		},
 		config = function()
-			require("rc/pluginconf/leap")
+			require("rc/pluginconfig/flash")
 		end,
 	},
-
 	--------------------------------
 	-- Horizontal Move
-	{
-		"jinh0/eyeliner.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("rc/pluginconf/eyeliner")
-		end,
-	},
+	-- {
+	-- 	"jinh0/eyeliner.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("rc/pluginconfig/eyeliner")
+	-- 	end,
+	-- },
 	-- {
 	-- 	"ggandor/flit.nvim",
 	-- 	event = "VeryLazy",
 	-- 	config = function()
-	-- 		require("rc/pluginconf/flit")
+	-- 		require("rc/pluginconfig/flit")
 	-- 	end,
 	-- 	dependencies = {
 	-- 		{	"ggandor/leap.nvim" },
@@ -455,7 +510,7 @@ local plugins = {
 		"chrisgrieser/nvim-spider",
 		event = "VeryLazy",
 		config = function()
-			require("rc/pluginconf/nvim-spider")
+			require("rc/pluginconfig/nvim-spider")
 		end,
 	},
 	--------------------------------
@@ -466,20 +521,30 @@ local plugins = {
 		config = true,
 	},
 
+	-----------------
+	-- Adding and subtracting
+	{
+		"monaqa/dial.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("rc/pluginconfig/dial")
+		end,
+	},
+
 	----------------------------------------------------------------
 	-- Search
 	{
 		"kevinhwang91/nvim-hlslens",
 		event = "VeryLazy",
 		config = function()
-			require("rc/pluginconf/nvim-hlslens")
+			require("rc/pluginconfig/nvim-hlslens")
 		end,
 	},
 	{
 		"rapan931/lasterisk.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("rc/pluginconf/lasterisk")
+			require("rc/pluginconfig/lasterisk")
 		end,
 	},
 
@@ -493,7 +558,7 @@ local plugins = {
 		branch = "v2.x",
 		keys = "<leader>s",
 		config = function()
-			require("rc/pluginconf/neo-tree")
+			require("rc/pluginconfig/neo-tree")
 		end,
 		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
@@ -510,7 +575,7 @@ local plugins = {
 		tag = "0.1.1",
 		keys = "<leader>f",
 		config = function()
-			require("rc/pluginconf/telescope")
+			require("rc/pluginconfig/telescope")
 		end,
 		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
@@ -533,6 +598,16 @@ local plugins = {
 	-- 	end,
 	-- },
 
+	-- prevent to open window in sidebar and trrouble .etc
+	{
+		'stevearc/stickybuf.nvim',
+		event = "VeryLazy",
+		opts = {},
+		config = function()
+			require("rc/pluginconfig/stickybuf")
+		end
+	},
+
 	----------------------------------------------------------------
 	-- Terminal
 
@@ -542,7 +617,7 @@ local plugins = {
 		"alexghergh/nvim-tmux-navigation",
 		event = "BufRead",
 		config = function()
-			require("rc/pluginconf/nvim-tmux-navigation")
+			require("rc/pluginconfig/nvim-tmux-navigation")
 		end,
 	},
 
@@ -562,7 +637,7 @@ local plugins = {
 		"kevinhwang91/nvim-ufo",
 		event = "BufRead",
 		config = function()
-			require("rc/pluginconf/nvim-ufo")
+			require("rc/pluginconfig/nvim-ufo")
 		end,
 		dependencies = {
 			{ "kevinhwang91/promise-async" },
@@ -577,7 +652,7 @@ local plugins = {
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("rc/pluginconf/which-key")
+			require("rc/pluginconfig/which-key")
 		end,
 	},
 
@@ -594,7 +669,7 @@ local plugins = {
 		"folke/noice.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("rc/pluginconf/noice")
+			require("rc/pluginconfig/noice")
 		end,
 		dependencies = {
 			{ "MunifTanjim/nui.nvim" },
@@ -616,7 +691,7 @@ local plugins = {
 		"lewis6991/gitsigns.nvim",
 		event = { "BufNewFile", "BufRead" },
 		config = function()
-			require("rc/pluginconf/gitsigns")
+			require("rc/pluginconfig/gitsigns")
 		end,
 	},
 } -- Plugin List End
@@ -626,190 +701,3 @@ require("lazy").setup(plugins, {
 		lazy = true, -- should plugins be lazy-loaded?
 	},
 })
-
--- local status, packer = pcall(require, 'packer')
--- if (not status) then
---   print('Packer is not installed')
--- end
-
--- vim.cmd([[packadd packer.nvim]])
-
--- packer.startup(function(use)
--- use 'wbthomason/packer.nvim' -- Plugin manager
-
--- -- Editor
--- use 'nvim-lualine/lualine.nvim'   -- Statusline
--- use 'akinsho/nvim-bufferline.lua' -- Tab custom
--- use 'kwkarlwang/bufresize.nvim'   -- Buffer auto resize
--- use 'sidebar-nvim/sidebar.nvim'   -- Side bar
--- use {
---   'svrana/neosolarized.nvim',
---   requires = { 'tjdevries/colorbuddy.nvim' }
--- }
--- use 'goolord/alpha-nvim'
--- use { "nvim-neo-tree/neo-tree.nvim", branch = "v2.x", }
--- use "lukas-reineke/indent-blankline.nvim"
---
--- -- Library
--- use 'zsugabubus/crazy8.nvim' -- Auto define ts, sw, sts, et
--- use 'tpope/vim-repeat'
--- use 'machakann/vim-sandwich'
--- use 'numToStr/Comment.nvim'
--- use 'yutkat/wb-only-current-line.nvim'
--- use 'folke/which-key.nvim'
--- use 'yoshida-m-3/vim-im-select'
--- use 'hrsh7th/nvim-insx'
---
--- -- Motion
--- use {
---   'phaazon/hop.nvim',
---   branch = 'v2', -- optional but strongly recommended
---   config = function()
---     require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
---   end
--- }
--- use {
---   'jinh0/eyeliner.nvim',
---   config = function()
---     require 'eyeliner'.setup {
---       highlight_on_key = true
---     }
---   end
--- }
--- -- use 'ggandor/lightspeed.nvim'
--- use 'haya14busa/vim-edgemotion'
--- -- use 'machakann/vim-columnmove'
--- use 'justinmk/vim-ipmotion'    -- {, } の移動を強化
--- -- use 'bkad/CamelCaseMotion'
--- use 'osyo-manga/vim-milfeulle' -- <C-o>を強化
--- use 'kwkarlwang/bufjump.nvim'
--- use {
---   'cbochs/portal.nvim',
---   requires = {
---     "cbochs/grapple.nvim",  -- Optional: provides the "grapple" query item
---     "ThePrimeagen/harpoon", -- Optional: provides the "harpoon" query item
---   },
--- }
--- use 'rapan931/lasterisk.nvim'
---
--- use 'kevinhwang91/nvim-hlslens'
--- use 'petertriho/nvim-scrollbar'
--- use 'myusuf3/numbers.vim'
---
--- use 'haringsrob/nvim_context_vt'
--- use 'ntpeters/vim-better-whitespace'
-
--- use 'j-hui/fidget.nvim'
--- use 'rcarriga/nvim-notify'
--- use 'folke/trouble.nvim'
--- use 'folke/noice.nvim'
---
--- use 'tyru/open-browser.vim'
--- use 'norcalli/nvim-colorizer.lua'
---
--- -- Plugin library
--- use 'nvim-lua/plenary.nvim'       -- Common utilities
--- use 'nvim-tree/nvim-web-devicons' -- File icons
--- use 'nvim-lua/popup.nvim'
--- use 'kkharji/sqlite.lua'
--- use 'MunifTanjim/nui.nvim'
---
--- -- LSP
--- use 'neovim/nvim-lspconfig'
--- use 'williamboman/mason.nvim'
--- use 'williamboman/mason-lspconfig.nvim'
--- use 'folke/lsp-colors.nvim' use 'glepnir/lspsaga.nvim' -- LSP UIs
---
--- -- Completion
--- use 'hrsh7th/nvim-cmp'                     -- Completion
--- use 'onsails/lspkind-nvim'                 -- vscode-like pictograms
--- use 'hrsh7th/cmp-nvim-lsp'                 -- nvim-cmp source for neovim's built-in LSP
--- use 'hrsh7th/cmp-nvim-lsp-signature-help'  -- nvim-cmp source
--- use 'hrsh7th/cmp-nvim-lsp-document-symbol' -- nvim-cmp source
--- use 'hrsh7th/cmp-buffer'                   -- nvim-cmp source
--- use 'hrsh7th/cmp-path'                     -- nvim-cmp source
--- use 'hrsh7th/cmp-nvim-lua'                 -- nvim-cmp source
--- use 'f3fora/cmp-spell'
--- use 'yutkat/cmp-mocword'
--- use 'uga-rosa/cmp-dictionary'
--- use {
---   'tzachar/cmp-tabnine',
---   run = './install.sh',
---   requires = 'hrsh7th/nvim-cmp',
--- }
--- use 'hrsh7th/cmp-cmdline'  -- nvim-cmp source
--- use 'hrsh7th/vim-vsnip'    -- nvim-cmp source
--- use 'ray-x/cmp-treesitter' -- nvim-cmp source
--- -- use 'windwp/nvim-autopairs'
---
--- -- Linter, Formatter
--- use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP
--- use {
---   'nvim-treesitter/nvim-treesitter',
---   run = function()
---     require('nvim-treesitter.install').update({ with_sync = true })
---   end,
--- }
--- use {
---   "yioneko/nvim-yati",
---   tag = "*",
--- }
--- use 'windwp/nvim-ts-autotag' -- Install after TS installation have completed
--- use 'mrjones2014/nvim-ts-rainbow'
--- use 'JoosepAlviste/nvim-ts-context-commentstring'
--- use 'm-demare/hlargs.nvim' -- Highlight args
--- use 'andymass/vim-matchup'
---
--- -- FZF
--- use { 'nvim-telescope/telescope.nvim', tag = '0.1.0' }
--- use 'nvim-telescope/telescope-file-browser.nvim'
--- use 'nvim-telescope/telescope-frecency.nvim'
--- use 'nvim-telescope/telescope-packer.nvim'
---
--- -- Git
--- -- use  'TimUntersberger/neogit'
--- -- use  'sindrets/diffview.nvim'
--- -- use { 'akinsho/git-conflict.nvim', tag = "*", }
--- use 'lewis6991/gitsigns.nvim'
--- use 'kdheepak/lazygit.nvim' -- telescope extension
---
--- -- Language
--- use 'jwalton512/vim-blade'       -- blade
--- use 'mtdl9/vim-log-highlighting' -- Log
--- -- use({
--- --   'iamcco/markdown-preview.nvim', -- Markdown
--- --   run = function()
--- --     vim.fn["mkdp#util#install"]()
--- --   end,
--- -- })
---
--- -- install without yarn or npm
--- use({
---   "iamcco/markdown-preview.nvim",
---   run = function() vim.fn["mkdp#util#install"]() end,
--- })
--- -- use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
---
--- -- Zen Mode
--- use 'folke/zen-mode.nvim'
---
--- -- startup time measurement
--- use 'dstein64/vim-startuptime'
---
--- -- similar to mkdir -p on linux
--- use 'jghauser/mkdir.nvim'
--- end) -- packer end
-
--- better-whitespace config
--- vim.cmd([[
---   let g:better_whitespace_operator='_s' " 削除コマンドのprefix変更
---   let g:strip_whitespace_on_save=1 " 保存時にスペース削除
---   let g:strip_whitespace_confirm=0 " 0:保存時にスペース削除の確認をしない
---   let g:better_whitespace_filetypes_blacklist = ['alpha', 'lspsagafinder']
---   autocmd FileType * EnableStripWhitespaceOnSave
--- ]])
---
--- -- vim-sandwich config
--- vim.cmd([[
---   runtime macros/sandwich/keymap/surround.vim
--- ]])
