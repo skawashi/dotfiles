@@ -54,7 +54,7 @@ local config = {
 
 
 	-- import key binds config file
-	leader = { key = "g", mods = "CTRL", timeout_milliseconds = 5000 },
+	leader = { key = "º", mods = "CTRL", timeout_milliseconds = 5000 },
 	disable_default_key_bindings = true,
 	keys = require("keybinds").keys,
 	key_tables = require("keybinds").key_tables,
