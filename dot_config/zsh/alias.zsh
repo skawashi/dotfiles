@@ -34,17 +34,18 @@ alias view='nvim -R'
 alias vimtime='vim --startuptime ./startup.log'
 
 ## normal command
-alias ls='exa --icons'
+alias ls='eza --icons'
 alias l='ls'
 alias la='ls -a'
-alias lla='ls -la'
+alias lla='ls -lha'
 alias rm='\rm -i'
 alias mv='\mv -i'
 alias cp='\cp -i'
 alias cat='bat'
 alias c='bat'
 alias cl='clear'
-alias grep="rg"
+alias grep='rg'
+alias find='fd'
 
 ## Git command
 alias ga='git add'
