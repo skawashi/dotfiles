@@ -33,8 +33,8 @@ local config = {
 	color_scheme = "Solarized Dark (Gogh)",
 	force_reverse_video_cursor = true,
 
-	-- default_cursor_style = "BlinkingBlock",
-	-- cursor_blink_rate = 350,
+	default_cursor_style = "BlinkingBlock",
+	cursor_blink_rate = 350,
 
 	hide_tab_bar_if_only_one_tab = true,
 	window_background_opacity = 0.95,
@@ -54,7 +54,7 @@ local config = {
 
 
 	-- import key binds config file
-	leader = { key = "º", mods = "CTRL", timeout_milliseconds = 5000 },
+	leader = { key = "ª", mods = "CTRL", timeout_milliseconds = 5000 },
 	disable_default_key_bindings = true,
 	keys = require("keybinds").keys,
 	key_tables = require("keybinds").key_tables,
